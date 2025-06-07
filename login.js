@@ -2,37 +2,56 @@ import { auth } from './firebase-config.js';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, fetchSignInMethodsForEmail } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
 document.querySelector('button[onclick="loginUser()"]').onclick = () => {
-  showLoader(); // ⬅️ Show loader here
-  const email = document.getElementById("loginEmail").value;
+  showLoader();
+
+  const email = document.getElementById("loginEmail").value.trim();
   const password = document.getElementById("loginPassword").value;
 
-  if (!email) {
-    showPopup("Please enter a valid email address.");
+  // Input validation
+  if (!email || !email.includes("@") || !email.includes(".")) {
+    showPopup("❌ Please enter a valid email address.");
     hideLoader();
     return;
   }
   if (!password) {
-    showPopup("Please enter the password for your account.");
+    showPopup("❌ Please enter your password.");
     hideLoader();
     return;
   }
 
+  // Firebase login
   signInWithEmailAndPassword(auth, email, password)
     .then(() => {
       const name = deriveNameFromEmail(email);
       localStorage.setItem('loggedInUser', JSON.stringify({ name, email }));
-      hideLoader(); // ⬅️ Hide loader at end
-      showPopup("You are successfully logged in to your account.");
+      hideLoader();
+      showPopup("✅ You are successfully logged in.");
       window.location.href = "home.html";
     })
-    .catch(() =>{
-      showPopup("Account is not yet signed up. Try signing up.");
-      hideLoader(); // ⬅️ Hide loader at end
+    .catch((error) => {
+      hideLoader();
+
+      // Firebase error code handling
+      switch (error.code) {
+        case 'auth/user-not-found':
+          showPopup("❌ This email is not registered. Try signing up.");
+          break;
+        case 'auth/wrong-password':
+          showPopup("❌ Incorrect password. Please try again.");
+          break;
+        case 'auth/invalid-email':
+          showPopup("❌ Invalid email format.");
+          break;
+        case 'auth/too-many-requests':
+          showPopup("⚠️ Too many failed attempts. Please try again later.");
+          break;
+        default:
+          console.error("Login error:", error);
+          showPopup("❌ Login failed. Please try again.");
+          break;
+      }
     });
-
-
 };
-
 
 setupPasswordToggle('loginPassword', 'togglePsw');
 function setupPasswordToggle(inputId, iconId) {
