@@ -139,6 +139,7 @@ function checkFormValidity() {
 
   if (emailStatus && passwordValid && passwordsMatch) {
     signupButton.disabled = false;
+    showPopup("Fill all the details to send you OTP.");
     console.log("email status : " + emailStatus);
     console.log("password valid : " + passwordValid);
     console.log("password match : " + passwordsMatch);
