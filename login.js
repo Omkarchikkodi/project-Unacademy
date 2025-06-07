@@ -47,7 +47,7 @@ document.querySelector('button[onclick="loginUser()"]').onclick = () => {
           break;
         default:
           console.error("Login error:", error);
-          showPopup("❌ Login failed. Please try again.");
+          showPopup("❌ Login failed. Please check your credentials and try again.");
           break;
       }
     });
