@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = user.email;
       const uid = user.uid;
       const signupMethod = 'google'; // helpful for future reference
-      const createdAt = new Date();
+      // const createdAt = new Date();
 
       console.log("Google login successful:", { name, email });
 
@@ -93,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!docSnap.exists()) {
         // ✅ Only create new doc if not exists
+        const createdAt = new Date();
         await setDoc(userDocRef, { email, name, signupMethod, createdAt });
         console.log("📝 New user document created.");
       } else {
@@ -139,7 +140,6 @@ function checkFormValidity() {
 
   if (emailStatus && passwordValid && passwordsMatch) {
     signupButton.disabled = false;
-    showPopup("Fill all the details to send you OTP.");
     console.log("email status : " + emailStatus);
     console.log("password valid : " + passwordValid);
     console.log("password match : " + passwordsMatch);
@@ -147,6 +147,7 @@ function checkFormValidity() {
     console.log("email status : " + emailStatus);
     console.log("password valid : " + passwordValid);
     console.log("password match : " + passwordsMatch);
+    // showPopup("Fill all the details to send you OTP.");
     signupButton.disabled = true;
   }
 }
