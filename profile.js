@@ -281,10 +281,10 @@ async function saveProfile() {
     const istDateTime = currentTime.toLocaleString('en-IN', options);
     console.log(istDateTime);
     user.lastModifiedAt = currentTime;
-    if (!user.createdAt) {
-        console.log("dont have created at");
-        user.createdAt = currentTime;
-    }
+    // if (!user.createdAt) {
+    //     console.log("dont have created at");
+    //     user.createdAt = currentTime;
+    // }
 
     localStorage.setItem('loggedInUser', JSON.stringify(user));
 
@@ -307,7 +307,7 @@ async function saveProfile() {
                     district: user.district,
                     pincode: user.pincode,
                     lastModifiedAt: serverTimestamp(), // Always update with server time
-                    createdAt:user.createdAt
+                    // createdAt:user.createdAt
                 };
 
                 // Only set createdAt if it doesn't exist in the database yet
@@ -315,9 +315,9 @@ async function saveProfile() {
                 const { getDoc } = await import("https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js");
                 const docSnap = await getDoc(userDocRef);
 
-                if (!docSnap.exists() || !docSnap.data().createdAt) {
-                    dataToUpdate.createdAt = serverTimestamp(); // Set createdAt only once for new users
-                }
+                // if (!docSnap.exists() || !docSnap.data().createdAt) {
+                //     dataToUpdate.createdAt = serverTimestamp(); // Set createdAt only once for new users
+                // }
 
                 await setDoc(userDocRef, user, { merge: true });
                 console.log("✅ Profile data synced to Firestore");
