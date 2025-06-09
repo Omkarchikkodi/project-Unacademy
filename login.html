@@ -7,8 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login | Simplified Minds</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js"></script>
+  <script src="firebase-config.js" type="module"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js" type="module"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js" type="module"></script>
   <link rel="stylesheet" href="loginsignup.css">
   <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -130,6 +131,9 @@
         <h2>Login</h2>
 
         <input type="email" id="loginEmail" placeholder="Email" required>
+        <small id="emailStatus"></small>
+        
+        <!-- Password Field with Eye Icon Inside -->
         <div class="password-wrapper">
           <input type="password" id="loginPassword" placeholder="Password">
           <i class="fa-solid fa-eye" id="togglePsw"></i>
@@ -355,7 +359,6 @@
   </div>
 
   <script type="module" src="login.js"></script>
-
 </body>
 
 </html>
