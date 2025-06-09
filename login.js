@@ -1,5 +1,47 @@
-import { auth } from './firebase-config.js';
+import { auth, db } from './firebase-config.js';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, fetchSignInMethodsForEmail } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+import {
+  getFirestore, collection, query, where, getDocs
+} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+document.getElementById("loginEmail").addEventListener("input", async function () {
+  const emailInput = this.value.trim();
+  const statusEl = document.getElementById("emailStatus");
+
+  if (!emailInput.includes("@")) {
+    statusEl.textContent = "";
+    return;
+  }
+
+  try {
+    const q = query(collection(db, "users"), where("email", "==", emailInput));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const userData = querySnapshot.docs[0].data();
+      const method = userData.signupMethod || "unknown";
+
+      if (method === "google") {
+        statusEl.style.color = "red";
+        statusEl.textContent = "❌ This account was signed up using Google. Please use Google Login.";
+      } else if (method === "email") {
+        statusEl.style.color = "green";
+        statusEl.textContent = "✅ Account found. You can login with email and password.";
+      } else {
+        statusEl.style.color = "orange";
+        statusEl.textContent = "⚠️ Unknown signup method. Try both login options.";
+      }
+    } else {
+      statusEl.style.color = "red";
+      statusEl.innerHTML = `❌ No account found with this email. Please <a href='signup.html' style='text-decoration: none; color: blue;'>sign up</a>.`;
+    }
+  } catch (err) {
+    console.error("Firestore email check error (login):", err);
+    statusEl.style.color = "red";
+    statusEl.textContent = "❌ Error checking email.";
+  }
+});
+
 
 document.querySelector('button[onclick="loginUser()"]').onclick = () => {
   showLoader();
@@ -52,6 +94,8 @@ document.querySelector('button[onclick="loginUser()"]').onclick = () => {
       }
     });
 };
+
+
 
 setupPasswordToggle('loginPassword', 'togglePsw');
 function setupPasswordToggle(inputId, iconId) {
