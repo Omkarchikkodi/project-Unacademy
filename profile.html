@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile - Simplified Minds</title>
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="profile.css" />
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="main.css">
+    <script type="module" src="profile.js"></script>
+</head>
+
+<body>
+    <!-- HEADER copied from home.html -->
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <div class="logo">📘 CBSE Class 10</div>
+            </div>
+            <div class="nav-center">
+                <input type="text" placeholder="Search courses, test series and educators" class="search-bar">
+            </div>
+            <div class="nav-right" id="userSection">
+                <div class="profile-wrapper">
+                    <div class="profile-icon">
+                        <img src="images/default-user.png" alt="User" class="profile-img">
+                        <div class="user-details">
+                            <div class="user-name" id="userName">Name</div>
+                            <div class="user-email" id="userEmail">email@example.com</div>
+                        </div>
+                        <button onclick="logout()" class="btn logout">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="home.html" style="text-decoration: none">Home</a></li>
+                <li><a href="yet_to_arrive.html" style="text-decoration: none">Get started</a></li>
+                <li><a href="yet_to_arrive.html" style="text-decoration: none">Educators</a></li>
+                <li><a href="yet_to_arrive.html" style="text-decoration: none">Batch</a></li>
+                <li><a href="quiz_attempt.html" style="text-decoration: none">Quiz</a></li>
+                <li id="quizUploaderLink" style="display: none;"><a href="quiz_upload.html"
+                        style="text-decoration: none">Quiz Uploader</a></li>
+                <li><a href="yet_to_arrive.html" style="text-decoration: none">Subscription Plan</a></li>
+                <li><a href="yet_to_arrive.html" style="text-decoration: none">Success stories</a></li>
+                <li><a href="yet_to_arrive.html" style="text-decoration: none">About exam</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+    <main class="profile-container">
+        <div class="profile-image"></div>
+        <div class="profile-form">
+            <h2>My Profile</h2>
+            <div class="profile-info">
+                <label>Name:</label>
+                <p id="displayName"></p>
+
+                <label>Email:</label>
+                <p id="displayEmail"></p>
+
+                <div class="input-row">
+                    <div class="input-field">
+                        <label for="class">Class:</label>
+                        <select id="classSelect">
+                            <option value="">Select Class</option>
+                            <option value="6">Class 6</option>
+                            <option value="7">Class 7</option>
+                            <option value="8">Class 8</option>
+                            <option value="9">Class 9</option>
+                            <option value="10">Class 10</option>
+                            <option value="11">Class 11</option>
+                            <option value="12">Class 12</option>
+                        </select>
+                    </div>
+                    <div class="input-field">
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" />
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-field">
+                        <label for="city">City:</label>
+                        <input type="text" id="city" />
+                    </div>
+                    <div class="input-field">
+                        <label for="pincode">Pincode:</label>
+                        <input type="text" id="pincode" maxlength="6" pattern="\d{6}" />
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-field">
+                        <label for="state">State:</label>
+                        <select id="state">
+                            <option value="">Select State</option>
+                            <option value="AndhraPradesh">Andhra Pradesh</option>
+                            <option value="ArunachalPradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="HimachalPradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="MadhyaPradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Panjab">Panjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="TamilNadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="UttarPradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="WestBengal">West Bengal</option>
+                        </select>
+                    </div>
+                    <div class="input-field">
+                        <label for="district">District:</label>
+                        <select id="district">
+                            <option value="">Select District</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="saveProfile()">Save</button>
+            </div>
+    </main>
+    <!-- Success Popup Overlay -->
+    <div id="popupOverlay">
+        <div class="popupBox">
+            <div class="popupIcon">
+                <!-- Your tick SVG here -->
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="120" height="120"
+                    viewBox="0 0 2048 2048">
+                    <circle cx="1024" cy="1024" r="1024" fill="#4CAF50" />
+                    <path fill="#fff" d="M896 1440l640-640-96-96-544 544-224-224-96 96 320 320z" />
+                </svg>
+            </div>
+            <h2>Profile Saved Successfully</h2>
+            <p>You will be redirected to the home page shortly.</p>
+        </div>
+    </div>
+    <div id="customPopup" class="popup hidden">
+        <p id="popupMessage"></p>
+    </div>
+
+</body>
+
+</html>

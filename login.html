@@ -1,0 +1,366 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Simplified Minds</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="firebase-config.js" type="module"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js" type="module"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js" type="module"></script>
+  <link rel="stylesheet" href="loginsignup.css">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <defs>
+            <style>
+              .cls-6 {
+                fill: #efc788
+              }
+
+              .cls-17 {
+                fill: none;
+                stroke-linecap: round;
+                stroke-width: 10px
+              }
+
+              .cls-9 {
+                fill: #415292
+              }
+
+              .cls-10 {
+                fill: #334079
+              }
+
+              .cls-17 {
+                stroke: #fff;
+                stroke-linejoin: round
+              }
+            </style>
+          </defs>
+          <circle cx="256" cy="256" r="256" style="fill:#284392" id="BULINE" />
+          <g id="Icons">
+            <path
+              d="M467.15 111.22c-1 3.31-2.07 6.6-3.22 9.84a218.94 218.94 0 0 1-9.93 23.65q-3.67 7.5-7.89 14.68A221.87 221.87 0 0 1 421 194a223.15 223.15 0 0 1-56.38 46 221.17 221.17 0 0 1-34.16 15.88 221.83 221.83 0 0 1-76.19 13.4 223.75 223.75 0 0 1-35.63-2.84 220.6 220.6 0 0 1-55.91-16.83q-4.77-2.15-9.41-4.52A223.4 223.4 0 0 1 60 155q-2.31-4.16-4.45-8.43a218.35 218.35 0 0 1-11.05-26.08c-.68-1.92-1.33-3.86-1.95-5.8a256.05 256.05 0 0 1 424.63-3.44z"
+              style="fill:#dfa158" />
+            <path
+              d="M429 231.35a140.14 140.14 0 0 0-8-37.35c-1.38-3.84-2.94-7.61-4.64-11.29A141.87 141.87 0 0 0 364.23 123a140.86 140.86 0 0 0-41.51-18 141.63 141.63 0 0 0-34.56-4.26h-67.45a141.34 141.34 0 0 0-34.71 4.3 139.36 139.36 0 0 0-25.23 9q-5.78 2.7-11.24 5.9c-2.21 1.29-4.39 2.64-6.52 4a141.74 141.74 0 0 0-50.52 58.61q-2.61 5.63-4.73 11.5a140.05 140.05 0 0 0-7.92 37.1q-.41 5.34-.41 10.79v98.36h25.68v-88.01c0-1.28 0-2.53.1-3.78 2.62 0 5.22 0 7.78-.09s5.11-.14 7.62-.25q11.29-.49 21.83-1.68 5.55-.63 10.89-1.4c3.2-.47 6.34-1 9.43-1.52q8.58-1.51 16.6-3.42 4-.94 7.87-2t7.59-2.13c1.24-.37 2.47-.74 3.68-1.12q3.66-1.14 7.17-2.34 5.27-1.8 10.21-3.72c2.2-.85 4.36-1.72 6.46-2.6 1.09-.45 2.17-.91 3.24-1.37q4.57-2 8.85-4 2.88-1.38 5.63-2.78 4.13-2.1 7.93-4.23c1.7-.94 3.34-1.88 4.95-2.83q4.81-2.82 9.08-5.62c3.55-2.32 6.83-4.59 9.83-6.78 2.06-1.51 4-3 5.79-4.39.83-.64 1.62-1.28 2.39-1.9a163.37 163.37 0 0 0 13-11.64c2.41-2.45 3.66-3.92 3.79-4.06a134.24 134.24 0 0 0 6.55 12.36c.3.48.59 1 .88 1.44.88 1.43 1.79 2.83 2.71 4.19s1.86 2.69 2.81 4c.64.86 1.28 1.71 1.92 2.54s1.3 1.65 2 2.46c1 1.2 2 2.38 3 3.52l.88 1c.38.42.76.84 1.15 1.25s.68.73 1 1.09c.69.72 1.38 1.43 2.08 2.12A122.19 122.19 0 0 0 364.65 240a134.28 134.28 0 0 0 13.35 4.33l1.84.48c2.72.68 5.29 1.24 7.68 1.7l2.32.42 2.89.46.68.1c.9.13 1.76.24 2.56.34l1.18.14.56.06 1.07.11 1 .09.91.07.83.06 1.08.07H404.9v91.95h24.53V242.1c.01-3.62-.13-7.2-.43-10.75z"
+              style="fill:#683027" />
+            <path
+              d="M296.78 176.6s-42.43 50.76-134 67a329.65 329.65 0 0 1-57.55 4.94c-.07 1.25-.1 2.5-.1 3.78v88.17h-25.7V242.1a141.19 141.19 0 0 1 70.1-122c22.11 27.42 65.71 59.9 147.25 56.5z"
+              style="fill:#552723" />
+            <path
+              d="M162.76 359.32V243.58a330.49 330.49 0 0 1-57.55 4.93c-.06 1.25-.1 2.51-.1 3.78V357.6c0 82.57 67.55 151.74 150.12 151.61a149.87 149.87 0 0 0 28.61-2.77 149.94 149.94 0 0 1-121.08-147.12z"
+              style="fill:#d9b37f" />
+            <path class="cls-6"
+              d="M404.81 248.51c-2.83 0-75.24-1.41-108-71.91 0 0-42.44 50.75-134 67v115.72a149.94 149.94 0 0 0 121.03 147.12 149.94 149.94 0 0 0 121.07-147.12v-107c0-1.32-.04-2.56-.1-3.81z" />
+            <rect x="229.35" y="360.07" width="48.49" height="25.54" rx="12.77" style="fill:#c2a077" />
+            <path d="M223.5 419.05a30.1 30.1 0 0 0 60.19 0"
+              style="stroke-miterlimit:10;stroke:#c2a077;fill:none;stroke-linecap:round;stroke-width:10px" />
+            <path class="cls-6" d="M404.91 252.29v-3.78h-.1c.06 1.25.1 2.49.1 3.78z" />
+            <path class="cls-9"
+              d="m62.85 282-1.19.69c-4.84 2.83-8 9.29-8 16.43v46.12c0 7.14 3.14 13.6 8 16.43l1.19.69a33.35 33.35 0 0 0 13.79 4.52 66 66 0 0 1 6.7.88l21.77 4.24v-99.63l-21.77 4.25a66 66 0 0 1-6.7.88 33.35 33.35 0 0 0-13.79 4.5z" />
+            <path class="cls-10"
+              d="M105.11 369 99 367.78c-2.21-.43-4.45-.67-6.7-.88a33.36 33.36 0 0 1-13.78-4.52l-1.19-.69c-4.85-2.83-8-9.29-8-16.43v-46.12c0-7.14 3.14-13.6 8-16.43l1.19-.69a33.5 33.5 0 0 1 13.78-4.52 65.3 65.3 0 0 0 6.7-.88l6.11-1.19z" />
+            <path class="cls-9"
+              d="m447.17 362.38 1.19-.69c4.84-2.83 8-9.29 8-16.43v-46.12c0-7.14-3.14-13.6-8-16.43l-1.19-.69a33.35 33.35 0 0 0-13.79-4.52 66 66 0 0 1-6.7-.88l-21.77-4.25V372l21.77-4.25a66 66 0 0 1 6.7-.88 33.35 33.35 0 0 0 13.79-4.49z" />
+            <path class="cls-10"
+              d="m404.91 275.43 6.11 1.19c2.21.43 4.45.67 6.7.88a33.36 33.36 0 0 1 13.78 4.5l1.19.69c4.85 2.83 8 9.29 8 16.43v46.12c0 7.14-3.14 13.6-8 16.43l-1.19.69a33.5 33.5 0 0 1-13.78 4.52 65.3 65.3 0 0 0-6.7.88l-6.11 1.24z" />
+            <rect x="87.08" y="273.72" width="342.35" height="93.31" rx="46.66" style="fill:#62ac8d" />
+            <rect x="122.91" y="293.58" width="270.71" height="53.58" rx="26.79" style="fill:#c9dcf1" />
+            <path d="M122.91 320.37a26.78 26.78 0 0 0 26.79 26.79h13.06v-53.58H149.7a26.79 26.79 0 0 0-26.79 26.79z"
+              style="fill:#b4c6d5" />
+            <rect x="145.59" y="312.17" width="225.33" height="16.4" rx="8.2" style="fill:#ce404a" />
+            <path
+              d="M162.76 347.16H149.7a26.78 26.78 0 0 1-26.79-26.79 26.79 26.79 0 0 1 26.79-26.79h13.06v-19.86h-29a46.65 46.65 0 0 0-46.66 46.65A46.66 46.66 0 0 0 133.74 367H163q-.19-3.82-.2-7.71z"
+              style="fill:#539179" />
+            <circle cx="253.6" cy="117.71" r="110.76"
+              style="stroke:#fff;stroke-miterlimit:10;fill:none;stroke-linecap:round;stroke-width:10px" />
+            <path class="cls-17" d="M231.01 195.03v-74.98h-36.53" />
+            <circle class="cls-17" cx="177.11" cy="120.05" r="17.37" />
+            <path class="cls-17" d="M277.64 195.03v-74.98h36.54" />
+            <circle class="cls-17" cx="331.54" cy="120.05" r="17.37" />
+            <circle class="cls-17" cx="254.3" cy="47.04" r="17.37" />
+            <circle class="cls-17" cx="469.77" cy="137.42" r="17.37" />
+            <path class="cls-17"
+              d="M254.3 195.03V67.71M357.01 220.64l37.94-37.93h27.84l32.9-32.9M393.61 231.35h37.02l18.01-18.01M469.77 212.71h17.37" />
+            <circle class="cls-17" cx="40.73" cy="137.42" r="17.37" />
+            <path class="cls-17"
+              d="m153.49 220.64-37.94-37.93H87.71l-32.9-32.9M116.89 231.35H79.88l-18.02-18.01M40.73 212.71H23.37M129.01 160.71l-27.1-27.1V97.04L85.49 80.62M376.6 160.71l27.1-27.1V97.04l16.42-16.42" />
+          </g>
+        </svg>
+        <span>Simplified Minds</span>
+      </div>
+    </div>
+    <div class="nav-center">
+      <input type="text" placeholder="Search courses, test series and educators" class="search-bar">
+    </div>
+    <div class="nav-right" id="authSection">
+      <div class="contact">📞 +91-9999999999</div>
+      <a href="signup.html" class="btn login">Sign up</a>
+      <a href="home.html" class="btn signup">Home</a>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <ul>
+      <li><a href="home.html" style="text-decoration: none">Home</a></li>
+      <li><a href="yet_to_arrive.html" style="text-decoration: none">Get started</a></li>
+      <li><a href="yet_to_arrive.html" style="text-decoration: none">Educators</a></li>
+      <li><a href="yet_to_arrive.html" style="text-decoration: none">Batch</a></li>
+      <li><a href="quiz_attempt.html" style="text-decoration: none">Quiz</a></li>
+      <li id="quizUploaderLink" style="display: none;"><a href="quiz_upload.html" style="text-decoration: none">Quiz Uploader</a></li>
+      <li><a href="yet_to_arrive.html" style="text-decoration: none">Subscription Plan</a></li>
+      <li><a href="yet_to_arrive.html" style="text-decoration: none">Success stories</a></li>
+      <li><a href="yet_to_arrive.html" style="text-decoration: none">About exam</a></li>
+    </ul>
+  </nav>
+  
+  <div class="illustration-auth">
+    <div class="illustration-login"></div>
+    <div class="auth">
+      <div class="auth-container">
+        <h2>Login</h2>
+
+        <input type="email" id="loginEmail" placeholder="Email" required>
+        <small id="emailStatus"></small>
+        
+        <!-- Password Field with Eye Icon Inside -->
+        <div class="password-wrapper">
+          <input type="password" id="loginPassword" placeholder="Password">
+          <i class="fa-solid fa-eye" id="togglePsw"></i>
+        </div>
+        <p id="forgotPassword"><a href="#" onclick="sendPasswordReset()">Forgot Password?</a></p>
+
+        <div id="loader" class="loader" style="display: none; margin: 20px auto;"></div>
+        <!-- Email/Password Login Button -->
+        <button onclick="loginUser()" class="btn-icon">
+          <svg fill="#000000" width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="m16.484 11.976 6.151-5.344v10.627zm-7.926.905 2.16 1.875c.339.288.781.462 1.264.462h.017-.001.014c.484 0 .926-.175 1.269-.465l-.003.002 2.16-1.875 6.566 5.639h-20.009zm-6.572-7.516h20.03l-9.621 8.356c-.104.082-.236.132-.38.132-.005 0-.009 0-.014 0h.001c-.004 0-.009 0-.014 0-.144 0-.277-.05-.381-.133l.001.001zm-.621 1.266 6.15 5.344-6.15 5.28zm21.6-2.441c-.24-.12-.522-.19-.821-.19h-20.285c-.3.001-.584.071-.835.197l.011-.005c-.618.309-1.035.937-1.035 1.663v.004 12.168c.001 1.026.833 1.857 1.858 1.858h20.283c1.026-.001 1.857-.833 1.858-1.858v-12.168c0-.001 0-.002 0-.004 0-.727-.419-1.357-1.029-1.66l-.011-.005z" />
+          </svg>
+          Login
+        </button>
+
+        <!-- Google Login Button -->
+        <button onclick="googleLogin()" class="btn-icon">
+          <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
+            <style type="text/css">
+              .st0 {
+                fill: #FFFFFF;
+              }
+
+              .st1 {
+                fill: #3A559F;
+              }
+
+              .st2 {
+                fill: #F4F4F4;
+              }
+
+              .st3 {
+                fill: #FF0084;
+              }
+
+              .st4 {
+                fill: #0063DB;
+              }
+
+              .st5 {
+                fill: #00ACED;
+              }
+
+              .st6 {
+                fill: #FFEC06;
+              }
+
+              .st7 {
+                fill: #FF0000;
+              }
+
+              .st8 {
+                fill: #25D366;
+              }
+
+              .st9 {
+                fill: #0088FF;
+              }
+
+              .st10 {
+                fill: #314358;
+              }
+
+              .st11 {
+                fill: #EE6996;
+              }
+
+              .st12 {
+                fill: #01AEF3;
+              }
+
+              .st13 {
+                fill: #FFFEFF;
+              }
+
+              .st14 {
+                fill: #F06A35;
+              }
+
+              .st15 {
+                fill: #00ADEF;
+              }
+
+              .st16 {
+                fill: #1769FF;
+              }
+
+              .st17 {
+                fill: #1AB7EA;
+              }
+
+              .st18 {
+                fill: #6001D1;
+              }
+
+              .st19 {
+                fill: #E41214;
+              }
+
+              .st20 {
+                fill: #05CE78;
+              }
+
+              .st21 {
+                fill: #7B519C;
+              }
+
+              .st22 {
+                fill: #FF4500;
+              }
+
+              .st23 {
+                fill: #00F076;
+              }
+
+              .st24 {
+                fill: #FFC900;
+              }
+
+              .st25 {
+                fill: #00D6FF;
+              }
+
+              .st26 {
+                fill: #FF3A44;
+              }
+
+              .st27 {
+                fill: #FF6A36;
+              }
+
+              .st28 {
+                fill: #0061FE;
+              }
+
+              .st29 {
+                fill: #F7981C;
+              }
+
+              .st30 {
+                fill: #EE1B22;
+              }
+
+              .st31 {
+                fill: #EF3561;
+              }
+
+              .st32 {
+                fill: none;
+                stroke: #FFFFFF;
+                stroke-width: 2;
+                stroke-miterlimit: 10;
+              }
+
+              .st33 {
+                fill: #0097D3;
+              }
+
+              .st34 {
+                fill: #01308A;
+              }
+
+              .st35 {
+                fill: #019CDE;
+              }
+
+              .st36 {
+                fill: #FFD049;
+              }
+
+              .st37 {
+                fill: #16A05D;
+              }
+
+              .st38 {
+                fill: #4486F4;
+              }
+
+              .st39 {
+                fill: none;
+              }
+
+              .st40 {
+                fill: #34A853;
+              }
+
+              .st41 {
+                fill: #4285F4;
+              }
+
+              .st42 {
+                fill: #FBBC05;
+              }
+
+              .st43 {
+                fill: #EA4335;
+              }
+            </style>
+            <g>
+              <path class="st39" d="M8.9,16c0,0.6,0.1,1.2,0.2,1.8L11,16l-1.8-1.8C9,14.8,8.9,15.4,8.9,16z" />
+              <path class="st40" d="M16,23.1c-3.3,0-6-2.2-6.8-5.2l-6.7,6.7C5.3,29,10.3,32,16,32c3.1,0,6-0.9,8.5-2.5l-6.7-6.7
+		C17.2,23,16.6,23.1,16,23.1z" />
+              <path class="st41" d="M32,13.8c-0.1-0.5-0.5-0.8-1-0.8H16c-0.6,0-1,0.4-1,1v5c0,0.6,0.4,1,1,1h5.3c-0.9,1.4-2.2,2.3-3.5,2.8
+		l6.7,6.7C29,26.7,32,21.7,32,16c0-0.3,0-0.5,0-0.7C32.1,14.9,32.1,14.4,32,13.8z" />
+              <path class="st42"
+                d="M8.9,16c0-0.6,0.1-1.2,0.2-1.8L2.5,7.5C0.9,10,0,12.9,0,16s0.9,6,2.5,8.5l6.7-6.7C9,17.2,8.9,16.6,8.9,16z" />
+              <path class="st43" d="M28.5,6c-1.1-1.4-2.5-2.6-4-3.6C22,0.9,19.1,0,16,0C10.3,0,5.3,3,2.5,7.5l6.7,6.7c0.8-3,3.6-5.2,6.8-5.2
+		c0.6,0,1.2,0.1,1.8,0.3c0.9,0.3,1.7,0.8,2.6,1.5c0.3,0.3,0.7,0.3,1.1,0.1l6.7-3.3c0.3-0.1,0.5-0.4,0.5-0.7
+		C28.8,6.6,28.7,6.3,28.5,6z" />
+            </g>
+          </svg>
+          Login with Google
+        </button>
+        <p id="loginError"></p>
+      </div>
+
+      <div id="customPopup" class="popup hidden">
+        <p id="popupMessage"></p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="login.js"></script>
+</body>
+
+</html>

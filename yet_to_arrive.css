@@ -1,0 +1,104 @@
+/* Reset and base styles */
+/* Existing styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;  /* 🔐 Avoid horizontal scroll */
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.justify-middle {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.mdl{
+  padding-top: 10vh;
+}
+.container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+}
+
+.icon {
+  margin-bottom: 1rem;
+  color: #ff9800;
+}
+
+.svg-icon {
+  width: 64px;
+  height: 64px;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #666;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.arrow-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 0.5rem;
+  stroke: currentColor;
+}
+
+/* Responsive enhancements */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .svg-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  h1 {
+    font-size: 1.25rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}

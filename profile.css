@@ -1,0 +1,258 @@
+/* === Base Reset === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f0f4f8;
+}
+
+/* === Layout === */
+
+/* === Grouped Input Rows === */
+.input-row {
+    display: flex; /* Make it a flex container */
+    gap: 16px; /* Spacing between the fields */
+    margin-bottom: 16px; /* Spacing between this row and the next element */
+    /* Remove gap from .profile-info if you use margin-bottom here to prevent double spacing */
+}
+
+.input-field {
+    flex: 1; /* Allows each field to take equal available space */
+    display: flex; /* Make the field itself a flex container */
+    flex-direction: column; /* Stack label and input vertically */
+}
+
+.profile-container {
+  display: flex;
+  height: calc(100vh - 80px);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.profile-image {
+  flex: 1;
+  background-image: url('images/studydesk.jpg');
+  background-size: cover;
+  background-position: center;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.profile-form {
+  flex: 1;
+  background: linear-gradient(to bottom right, #ffffff, #f3faff);
+  padding: 40px 48px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* === Headings === */
+.profile-form h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #34495e;
+}
+
+/* === Form Styling === */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-info label {
+  font-weight: 600;
+  color: #2d3436;
+  margin-bottom: 4px;
+}
+
+.profile-info p {
+  background: #ecf0f1;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+/* === Inputs and Selects === */
+.profile-info input,
+.profile-info select {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.profile-info input:focus,
+.profile-info select:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+/* === Grouped Input Rows === */
+.profile-info .row {
+  display: flex;
+  gap: 16px;
+}
+
+.profile-info .row .field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === Save Button === */
+.profile-info button {
+  margin-top: 24px;
+  background-color: #4a90e2;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile-info button:hover {
+  background-color: #357bd8;
+}
+
+/* === Logout Button === */
+.btn.logout {
+  background-color: #e74c3c;
+  margin-left: 20px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* === Popup Overlay === */
+#popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#popupOverlay.show {
+  display: flex;
+}
+
+/* === Popup Notification === */
+.popup {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* === Popup Box === */
+.popupBox {
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 0.4s ease;
+}
+
+.popupIcon {
+  margin-bottom: 20px;
+  animation: pulseGlow 1.2s infinite ease-in-out;
+}
+
+.popupBox h2 {
+  font-size: 1.6em;
+  color: #2e7d32;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.popupBox p {
+  font-size: 0.95em;
+  color: #555;
+  font-weight: 400;
+}
+
+/* === Animations === */
+@keyframes pulseGlow {
+  0% {
+    filter: drop-shadow(0 0 0px #4CAF50);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px #4CAF50);
+  }
+  100% {
+    filter: drop-shadow(0 0 0px #4CAF50);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Responsive (Mobile Friendly) === */
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .profile-image {
+    height: 200px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .profile-form {
+    border-radius: 0 0 12px 12px;
+    padding: 30px 20px;
+  }
+
+  .profile-info .row {
+    flex-direction: column;
+  }
+}
